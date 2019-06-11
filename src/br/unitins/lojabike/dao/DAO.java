@@ -1,10 +1,10 @@
-package br.unitins.lavajato.dao;
+package br.unitins.lojabike.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import br.unitins.lavajato.factory.ConnectionFactory;
+import br.unitins.lojabike.factory.ConnectionFactory;
 
 public abstract class DAO<T> {
 	

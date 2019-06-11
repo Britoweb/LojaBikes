@@ -1,4 +1,4 @@
-package br.unitins.lavajato.dao;
+package br.unitins.lojabike.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,15 +6,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.unitins.lavajato.application.Util;
-import br.unitins.lavajato.model.Carro;
-import br.unitins.lavajato.model.Categoria;
-import br.unitins.lavajato.model.Marca;
+import br.unitins.lojabike.application.Util;
+import br.unitins.lojabike.model.Bike;
+import br.unitins.lojabike.model.Categoria;
+import br.unitins.lojabike.model.Marca;
 
-public class CarroDAO extends DAO<Carro>  {
+public class BikeDAO extends DAO<Bike>  {
 	
 	@Override
-	public boolean create(Carro obj) {
+	public boolean create(Bike obj) {
 		boolean resultado = false;
 		
 		// verificando se tem uma conexao valida
@@ -25,8 +25,8 @@ public class CarroDAO extends DAO<Carro>  {
 		
 		PreparedStatement stat = null;
 		try {
-			stat =	getConnection().prepareStatement("INSERT INTO carro ( "
-										+ "  placa, "
+			stat =	getConnection().prepareStatement("INSERT INTO bike ( "
+										+ "  nome, "
 										+ "  categoria, "
 										+ "  modelo, "
 										+ "  marca ) " 
@@ -35,7 +35,7 @@ public class CarroDAO extends DAO<Carro>  {
 										+ " ?, "
 										+ " ?, "
 										+ " ? ) ");
-			stat.setString(1, obj.getPlaca());
+			stat.setString(1, obj.getNome());
 			stat.setInt(2, obj.getCategoria().getValue());
 			stat.setString(3, obj.getModelo());
 			stat.setInt(4, obj.getMarca().getValue());
@@ -57,7 +57,7 @@ public class CarroDAO extends DAO<Carro>  {
 	}
 
 	@Override
-	public boolean update(Carro obj) {
+	public boolean update(Bike obj) {
 		boolean resultado = false;
 		
 		// verificando se tem uma conexao valida
@@ -74,14 +74,14 @@ public class CarroDAO extends DAO<Carro>  {
 												   + "  modelo = ?, "
 												   + "  marca = ?  " 
 												   + "WHERE id = ? ");
-			stat.setString(1, obj.getPlaca());
+			stat.setString(1, obj.getNome());
 			stat.setInt(2, obj.getCategoria().getValue());
 			stat.setString(3, obj.getModelo());
 			stat.setInt(4, obj.getMarca().getValue());
 			stat.setInt(5, obj.getId());
 			
 			stat.execute();
-			Util.addMessageError("Alteração realizada com sucesso!");
+			Util.addMessageError("Alteraï¿½ï¿½o realizada com sucesso!");
 			resultado = true;
 		} catch (SQLException e) {
 			Util.addMessageError("Falha ao Alterar.");
@@ -113,7 +113,7 @@ public class CarroDAO extends DAO<Carro>  {
 			stat.setInt(1, id);
 			
 			stat.execute();
-			Util.addMessageError("Exclusão realizada com sucesso!");
+			Util.addMessageError("Exclusï¿½o realizada com sucesso!");
 			resultado = true;
 		} catch (SQLException e) {
 			Util.addMessageError("Falha ao Excluir.");
@@ -129,13 +129,13 @@ public class CarroDAO extends DAO<Carro>  {
 	}
 
 	@Override
-	public Carro findById(int id) {
+	public Bike findById(int id) {
 		// verificando se tem uma conexao valida
 		if (getConnection() == null) {
 			Util.addMessageError("Falha ao conectar ao Banco de Dados.");
 			return null;
 		}
-		Carro carro = null;
+		Bike bike = null;
 		
 		PreparedStatement stat = null;
 		
@@ -145,12 +145,12 @@ public class CarroDAO extends DAO<Carro>  {
 			
 			ResultSet rs = stat.executeQuery();
 			if(rs.next()) {
-				carro = new Carro();
-				carro.setId(rs.getInt("id"));
-				carro.setPlaca(rs.getString("placa"));
-				carro.setModelo(rs.getString("modelo"));
-				carro.setCategoria(Categoria.valueOf(rs.getInt("categoria")));
-				carro.setMarca(Marca.valueOf(rs.getInt("marca")));
+				bike = new Bike();
+				bike.setId(rs.getInt("id"));
+				bike.setNome(rs.getString("nome"));
+				bike.setModelo(rs.getString("modelo"));
+				bike.setCategoria(Categoria.valueOf(rs.getInt("categoria")));
+				bike.setMarca(Marca.valueOf(rs.getInt("marca")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -162,18 +162,18 @@ public class CarroDAO extends DAO<Carro>  {
 				e.printStackTrace();
 			}
 		}
-		return carro;
+		return bike;
 	}
 
 	@Override
-	public List<Carro> findAll() {
+	public List<Bike> findAll() {
 		// verificando se tem uma conexao valida
 		if (getConnection() == null) {
 			Util.addMessageError("Falha ao conectar ao Banco de Dados.");
 			return null;
 		}
 		
-		List<Carro> listaCarro = new ArrayList<Carro>();
+		List<Bike> listaCarro = new ArrayList<Bike>();
 		
 		PreparedStatement stat = null;
 	
@@ -181,9 +181,9 @@ public class CarroDAO extends DAO<Carro>  {
 			stat = getConnection().prepareStatement("SELECT * FROM Carro");
 			ResultSet rs = stat.executeQuery();
 			while(rs.next()) {
-				Carro c = new Carro();
+				Bike c = new Bike();
 				c.setId(rs.getInt("id"));
-				c.setPlaca(rs.getString("placa"));
+				c.setNome(rs.getString("nome"));
 				c.setModelo(rs.getString("modelo"));
 				c.setCategoria(Categoria.valueOf(rs.getInt("categoria")));
 				c.setMarca(Marca.valueOf(rs.getInt("marca")));

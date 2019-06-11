@@ -1,4 +1,4 @@
-package br.unitins.lavajato.application;
+package br.unitins.lojabike.application;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -19,7 +19,7 @@ public class Session {
 	
 	private ExternalContext getExternalContext() {
 		if (FacesContext.getCurrentInstance() == null) {
-			throw new RuntimeException("O FaceContext é exclusivo para uma requisição HTTP.");
+			throw new RuntimeException("O FaceContext ï¿½ exclusivo para uma requisiï¿½ï¿½o HTTP.");
 		}
 		return FacesContext.getCurrentInstance().getExternalContext();
 	}

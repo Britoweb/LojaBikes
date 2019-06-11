@@ -1,4 +1,4 @@
-package br.unitins.lavajato.application;
+package br.unitins.lojabike.application;
 
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -54,7 +54,7 @@ public class Util {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(url);
 		} catch (IOException e) {
-			addMessageError("Erro ao redirecionar a página.");
+			addMessageError("Erro ao redirecionar a pï¿½gina.");
 			e.printStackTrace();
 		}
 	}

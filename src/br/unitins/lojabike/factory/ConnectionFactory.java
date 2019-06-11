@@ -1,4 +1,4 @@
-package br.unitins.lavajato.factory;
+package br.unitins.lojabike.factory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,7 +17,7 @@ public class ConnectionFactory {
 			// registrando o driver do postgres
 			Class.forName("org.postgresql.Driver");
 			// estabelecendo um conexao com o banco
-			conn = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5433/lavajato",
+			conn = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/lojabike",
 															"topicos1", "123456");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Falha ao registrar o Driver de banco");

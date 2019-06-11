@@ -1,12 +1,10 @@
-package br.unitins.lavajato.model;
+package br.unitins.lojabike.model;
 
 public enum Marca {
 
-	VOLKSWAGEN(1, "Volkswagen"), 
-	CHEVROLET(2, "Chevrolet"),
-	FIAT(3, "Fiat"),
-	FORD(4, "Ford"),
-	HONDA(5, "Honda");
+	MONARK(1, "Volkswagen"), 
+	CALOI(2, "Chevrolet"),
+	SPECIALIZED(3, "Fiat");
 	
 	private int value;
 	private String label;

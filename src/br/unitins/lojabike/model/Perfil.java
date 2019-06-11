@@ -1,11 +1,10 @@
-package br.unitins.lavajato.model;
+package br.unitins.lojabike.model;
 
 public enum Perfil {
 	
 	ADMINISTRADOR(1, "Administrador"), 
 	GERENTE(2, "Gerente"), 
-	CLIENTE(3, "Cliente"), 
-	FUNCIONARIO(4, "Funcionário");
+	FUNCIONARIO(4, "Funcionï¿½rio");
 
 	private int value;
 	private String label;

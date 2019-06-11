@@ -1,12 +1,12 @@
-package br.unitins.lavajato.controller;
+package br.unitins.lojabike.controller;
 
 import java.io.Serializable;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import br.unitins.lavajato.application.Session;
-import br.unitins.lavajato.model.Usuario;
+import br.unitins.lojabike.application.Session;
+import br.unitins.lojabike.model.Usuario;
 
 @Named
 @ViewScoped

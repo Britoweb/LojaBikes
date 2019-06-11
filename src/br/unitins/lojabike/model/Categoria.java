@@ -1,12 +1,10 @@
-package br.unitins.lavajato.model;
+package br.unitins.lojabike.model;
 
 public enum Categoria {
 	
-	CARRO(1, "Carro"), 
-	SUV(2, "SUV"), 
-	CAMINHONETE(3, "Caminhonete"), 
-	MOTO(4, "Moto"), 
-	CAMINHAO(5, "Caminhão");
+	TRILHA(1, "Trilha"), 
+	PASSEIO(2, "Passeio"), 
+	CORRIDA(3, "Corrida");
 	
 	private int value;
 	private String label;

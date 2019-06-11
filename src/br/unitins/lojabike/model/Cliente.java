@@ -1,37 +1,23 @@
-package br.unitins.lavajato.model;
+
+package br.unitins.lojabike.model;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+public class Cliente {
 
-public class Usuario {
 	private Integer id;
-	
-	@NotBlank(message="O nome deve ser informado.")
+
+//		@NotBlank(message="O nome deve ser informado.")
 	private String nome;
-	
-	@Email(message="Email inválido.")
+
+//		@Email(message="Email invï¿½lido.")
 	private String login;
-	
-	@Size(min=6, max=20, message="Tamanho incompativel, valor mínimo: 6 e valor maximo:20.")
+
+//		@Size(min=6, max=20, message="Tamanho incompativel, valor mï¿½nimo: 6 e valor maximo:20.")
 	private String senha;
 	private Perfil perfil;
 	private LocalDate dataNascimento;
 
-	public Usuario() {
-
-	}
-
-	public Usuario(Integer id, String nome, String login, String senha, Perfil perfil) {
-		this.id = id;
-		this.nome = nome;
-		this.login = login;
-		this.senha = senha;
-		this.perfil = perfil;
-	}
-	
 	public Integer getId() {
 		return id;
 	}
