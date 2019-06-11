@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
+<h:head>
+	<title>Cadastro de Usuario</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+
+	<center>
+		<h1>Cadastro de Usuario</h1>
+
+		<h:messages style="color:red" />
+		<h:form>
+			<h:panelGrid id="panelForm"  columns="2">
+
+				<h:outputLabel value="Nome: " />
+				<h:inputText value="#{usuarioController.usuario.nome}" />
+
+				<h:outputLabel value="Login: " />
+				<h:inputText value="#{usuarioController.usuario.login}" />
+
+				<h:outputLabel value="Senha: " />
+				<h:inputSecret value="#{usuarioController.usuario.senha}" />
+
+				<h:outputLabel value="Data de Nascimento: " />
+				<input type="date" 
+					   jsf:value="#{usuarioController.usuario.dataNascimento}"
+					   pattern="yyyy-MM-dd">
+					   <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+				</input>
+				
+				<h:outputLabel value="Perfil: " />
+				<h:selectOneMenu value="#{usuarioController.usuario.perfil}">
+				   <f:selectItem itemLabel="Selecione ..." />
+				   <f:selectItems  value="#{usuarioController.listaPerfil}"
+				   				  var="perfil"
+				   				  itemLabel="#{perfil.label}"
+				   				  itemValue="#{perfil}"/>
+				</h:selectOneMenu>
+				
+			</h:panelGrid>
+
+			<h:panelGrid columns="4">
+				<h:commandButton value="Incluir"
+					disabled="#{usuarioController.usuario.id != null}"
+					actionListener="#{usuarioController.incluir}" >
+					<f:ajax execute="panelForm" render="@all" />
+				</h:commandButton>		
+
+				<h:commandButton value="Alterar"
+					disabled="#{usuarioController.usuario.id == null}"
+					actionListener="#{usuarioController.alterar}" >
+					<f:ajax execute="panelForm" render="@all" />
+				</h:commandButton>		
+					
+				<h:commandButton value="Excluir"
+					disabled="#{usuarioController.usuario.id == null}"
+					actionListener="#{usuarioController.excluir}" >
+					<f:ajax execute="panelForm" render="@all" />
+				</h:commandButton>										
+		
+				<h:commandButton value="Limpar"
+					actionListener="#{usuarioController.limpar}" >
+					<f:ajax execute="@this" render="@all" />
+				</h:commandButton>
+
+			</h:panelGrid>
+			
+			<h:dataTable value="#{usuarioController.listaUsuario}" var="obj">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputLabel value="#{obj.id}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:commandLink value="#{obj.nome}"
+						actionListener="#{usuarioController.editar(obj.id)}">
+						<f:ajax execute="@this" render="@form" />
+					</h:commandLink>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Login</f:facet>
+					<h:commandLink value="#{obj.login}"
+						actionListener="#{usuarioController.editar(obj.id)}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Senha</f:facet>
+					<h:outputLabel value="##########" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Data de Nascimento</f:facet>
+					<h:outputLabel value="#{obj.dataNascimento}" >
+						<f:convertDateTime type="localDate" pattern="dd-MM-yyyy" />
+					</h:outputLabel>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Perfil</f:facet>
+					<h:outputLabel value="#{obj.perfil.label}" />
+				</h:column>
+				
+			</h:dataTable>
+			
+		</h:form>
+
+	</center>
+</h:body>
+</html>

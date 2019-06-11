@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Cadastro de Carro</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+
+	<center>
+		<h1>Cadastro de Carro</h1>
+
+		<h:messages style="color:red" />
+		<h:form>
+			<h:panelGrid columns="2">
+
+				<h:outputLabel value="Placa: " />
+				<h:inputText value="#{carroController.carro.placa}" />
+
+				<h:outputLabel value="Modelo: " />
+				<h:inputText value="#{carroController.carro.modelo}" />
+
+				<h:outputLabel value="Marca: " />
+				<h:selectOneMenu value="#{carroController.carro.marca}">
+				   <f:selectItem itemLabel="Selecione ..." />
+				   <f:selectItems  value="#{carroController.listaMarca}"
+				   				  var="marca"
+				   				  itemLabel="#{marca.label}"
+				   				  itemValue="#{marca}"/>
+				</h:selectOneMenu>
+				
+				<h:outputLabel value="Categoria: " />
+				<h:selectOneMenu value="#{carroController.carro.categoria}">
+				   <f:selectItem itemLabel="Selecione ..." />
+				   <f:selectItems  value="#{carroController.listaCategoria}"
+				   				  var="categoria"
+				   				  itemLabel="#{categoria.label}"
+				   				  itemValue="#{categoria}"/>
+				</h:selectOneMenu>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="4">
+				<h:commandButton value="Incluir"
+					disabled="#{carroController.carro.id != null}"
+					actionListener="#{carroController.incluir}" />
+
+				<h:commandButton value="Alterar"
+					disabled="#{carroController.carro.id == null}"
+					actionListener="#{carroController.alterar}" />
+					
+				<h:commandButton value="Excluir"
+					disabled="#{carroController.carro.id == null}"
+					actionListener="#{carroController.excluir}" />										
+		
+				<h:commandButton value="Limpar"
+					actionListener="#{carroController.limpar}" />
+
+			</h:panelGrid>
+			
+			<h:dataTable value="#{carroController.listaCarro}" var="obj">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputLabel value="#{obj.id}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Placa</f:facet>
+					<h:commandLink value="#{obj.placa}"
+						actionListener="#{carroController.editar(obj.id)}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Modelo</f:facet>
+					<h:commandLink value="#{obj.modelo}"
+						actionListener="#{carroController.editar(obj.id)}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Categoria</f:facet>
+					<h:outputLabel value="#{obj.categoria.label}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Marca</f:facet>
+					<h:outputLabel value="#{obj.marca.label}" />
+				</h:column>
+			</h:dataTable>
+			
+		</h:form>
+
+	</center>
+</h:body>
+</html>
